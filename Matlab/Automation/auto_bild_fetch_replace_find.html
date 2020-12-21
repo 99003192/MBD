@@ -1,0 +1,175 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>auto_bild_fetch_replace_find</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-21"><meta name="DC.source" content="auto_bild_fetch_replace_find.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clc;
+<span class="comment">%%auto build</span>
+open_system(new_system(<span class="string">'model_auto'</span>));
+add_block(<span class="string">'simulink/Commonly Used Blocks/Constant'</span>, <span class="string">'model_auto/Constant'</span>);
+set_param(<span class="string">'model_auto/Constant'</span>,<span class="string">'position'</span>,[140,80,180,120]);
+add_block(<span class="string">'simulink/Commonly Used Blocks/Integrator'</span>,<span class="string">'model_auto/Integrator'</span>);
+set_param(<span class="string">'model_auto/Integrator'</span>,<span class="string">'position'</span>,[220,80,260,120]);
+add_line(<span class="string">'model_auto'</span>,<span class="string">'Constant/1'</span>,<span class="string">'Integrator/1'</span>);
+add_block(<span class="string">'simulink/Commonly Used Blocks/Gain'</span>,<span class="string">'model_auto/Gain'</span>);
+set_param(<span class="string">'model_auto/Gain'</span>,<span class="string">'position'</span>,[300,80,340,120]);
+add_line(<span class="string">'model_auto'</span>,<span class="string">'Integrator/1'</span>,<span class="string">'Gain/1'</span>);
+add_block(<span class="string">'simulink/Commonly Used Blocks/Out1'</span>,<span class="string">'model_auto/Scope'</span>);
+set_param(<span class="string">'model_auto/Scope'</span>,<span class="string">'position'</span>,[380,80,420,120]);
+add_line(<span class="string">'model_auto'</span>,<span class="string">'Gain/1'</span>,<span class="string">'Scope/1'</span>);
+
+<span class="comment">%%auto fetch and replace</span>
+RootParameterNames = fieldnames(get_param(0,<span class="string">'ObjectParameters'</span>));
+load_system(<span class="string">'add_script'</span>)
+GlobalParameterValue = get_param(0,<span class="string">'CurrentSystem'</span>)
+ModelParameterValue = get_param(<span class="string">'add_script'</span>,<span class="string">'ModelVersion'</span>)
+BlockPaths = find_system(<span class="string">'add_script'</span>,<span class="string">'Type'</span>,<span class="string">'Block'</span>)
+
+add_script
+set_param(<span class="string">'add_script'</span>,<span class="string">'Solver'</span>,<span class="string">'ode15s'</span>,<span class="string">'StopTime'</span>,<span class="string">'90'</span>)
+
+<span class="comment">%%auto find</span>
+text = fileread(<span class="string">'gravity_algorithm.pdf'</span>);
+Lines = strsplit(text,newline);
+k=1;
+<span class="keyword">for</span> i=1:length(Lines)
+    <span class="keyword">if</span> contains(Lines{i},<span class="string">"&lt;a"</span>)
+        newStr = extractBetween(Lines{i},<span class="string">"&lt;a"</span>,<span class="string">"&gt;"</span>);
+        <span class="keyword">for</span> j=1:length(newStr)
+            ValueStorage{k}=newStr{j};
+            k=k+1;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+ValueStorage=vertcat(<span class="string">"HTML Tag Value2"</span>,<span class="string">'ValueStorage'</span>);
+ValueStorage_XLS=cellstr(ValueStorage);
+xlswrite(<span class="string">"gravity.xlsx"</span>,ValueStorage_XLS);
+</pre><pre class="codeoutput">
+GlobalParameterValue =
+
+    'add_script'
+
+
+ModelParameterValue =
+
+    '1.2'
+
+
+BlockPaths =
+
+  4&times;1 cell array
+
+    {'add_script/Add'    }
+    {'add_script/Display'}
+    {'add_script/Value1' }
+    {'add_script/Value2' }
+
+</pre><img vspace="5" hspace="5" src="auto_bild_fetch_replace_find_01.png" alt=""> <img vspace="5" hspace="5" src="auto_bild_fetch_replace_find_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clc;
+%%auto build
+open_system(new_system('model_auto'));
+add_block('simulink/Commonly Used Blocks/Constant', 'model_auto/Constant');
+set_param('model_auto/Constant','position',[140,80,180,120]);
+add_block('simulink/Commonly Used Blocks/Integrator','model_auto/Integrator');
+set_param('model_auto/Integrator','position',[220,80,260,120]);
+add_line('model_auto','Constant/1','Integrator/1');
+add_block('simulink/Commonly Used Blocks/Gain','model_auto/Gain');
+set_param('model_auto/Gain','position',[300,80,340,120]);
+add_line('model_auto','Integrator/1','Gain/1');
+add_block('simulink/Commonly Used Blocks/Out1','model_auto/Scope');
+set_param('model_auto/Scope','position',[380,80,420,120]);
+add_line('model_auto','Gain/1','Scope/1');
+
+%%auto fetch and replace
+RootParameterNames = fieldnames(get_param(0,'ObjectParameters'));
+load_system('add_script')
+GlobalParameterValue = get_param(0,'CurrentSystem')
+ModelParameterValue = get_param('add_script','ModelVersion')
+BlockPaths = find_system('add_script','Type','Block')
+
+add_script
+set_param('add_script','Solver','ode15s','StopTime','90')
+
+%%auto find
+text = fileread('gravity_algorithm.pdf');
+Lines = strsplit(text,newline);
+k=1;
+for i=1:length(Lines)
+    if contains(Lines{i},"<a")
+        newStr = extractBetween(Lines{i},"<a",">");
+        for j=1:length(newStr)
+            ValueStorage{k}=newStr{j};
+            k=k+1;
+        end
+    end
+end
+ValueStorage=vertcat("HTML Tag Value2",'ValueStorage');
+ValueStorage_XLS=cellstr(ValueStorage);
+xlswrite("gravity.xlsx",ValueStorage_XLS);
+##### SOURCE END #####
+--></body></html>
